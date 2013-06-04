@@ -1,0 +1,20 @@
+{
+  "name": "library-reserves-lti-server",
+  "author": "Graham Ballantyne <grahamb@sfu.ca",
+  "description": "An express-based server to provide an LTI interface to the SFU Library's course reserves API",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/sfu/library-reserves-lti-server.git"
+  },
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "express": "3.0.0rc5",
+    "ejs": "*",
+    "css": "*",
+    "request": "2.21.x"
+  }
+}
