@@ -19,7 +19,6 @@ exports.index = function(req, res) {
         url: 'http://api.lib.sfu.ca/reserves/search',
         qs: qs
     }, function(err, resp, body) {
-        console.log(resp);
         res.render('index', { data: JSON.parse(body), course: req.body, title: 'Library Reserves' });
     });
 
