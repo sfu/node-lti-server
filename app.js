@@ -25,10 +25,6 @@ app.configure('development', function() {
     app.use(express.errorHandler());
 });
 
-app.get('/', function(req, res) {
-    res.send(405);
-});
-
 app.post('/', routes.index);
 
 http.createServer(app).listen(app.get('port'), function() {

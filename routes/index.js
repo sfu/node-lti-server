@@ -1,4 +1,8 @@
 exports.index = function(req, res) {
+    if (req.method !== 'POST') {
+        res.send(405);
+        return;
+    }
 
     var request = require('request');
 
