@@ -25,6 +25,14 @@ app.configure('development', function() {
     app.use(express.errorHandler());
 });
 
+app.configure('production', function() {
+    app.use(function(error, req, res, next) {
+        res.status(500);
+        res.render('500', {title: 'Library Reserves'});
+        console.log(error.stack);
+    });
+});
+
 app.all('/', routes.index);
 app.get('/isup', routes.isup);
 
