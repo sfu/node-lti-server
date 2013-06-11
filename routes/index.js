@@ -23,3 +23,8 @@ exports.index = function(req, res) {
     });
 
 };
+
+exports.isup = function(req, res) {
+    res.set('Content-Type', 'text/plain');
+    res.send('ok');
+};
