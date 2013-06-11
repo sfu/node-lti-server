@@ -30,7 +30,7 @@ namespace :deploy do
     transaction do
       update_code
       node.create_shared_dirs
-      node.node_modules_symlink
+      # node.node_modules_symlink
       node.npminstall
       symlink
     end
