@@ -2,7 +2,7 @@
 #
 # library-reserves-lti-server        Startup script for the library reserves LTI server
 #
-# chkconfig: - 90 10
+# chkconfig: 3 4 5
 #
 # processname: library-reserves-lti-server
 # pidfile: /var/nodeapps/library-reserves-lti-server/shared/pids/library-reserves-lti-server.pid
