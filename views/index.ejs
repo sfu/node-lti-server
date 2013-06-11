@@ -3,9 +3,17 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <h1>Library Reserves for <%= course.context_title %></h1>
+    <% if (data.reserves_count === 0) { %>
+        <p>There are no items on reserve for this course.</p>
+    <% } else { %>
+            <% data.reserves.forEach(function(item) { %>
+                <% include reserve_item %>
+            <% }) %>
+    <% } %>
+    <script src="javascripts/imgreplacer.js"></script>
   </body>
 </html>
