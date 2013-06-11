@@ -1,8 +1,34 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    font: 13px/1.5 'Helvetica Neue', Arial, 'Liberation Sans', FreeSans, sans-serif;
+    font-size: 75%;
+    color: #333;
+    padding-left: 10px;
+}
+
+h1, h2 {
+    font-size: 1.8em;
+    margin-bottom: .5em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    color: #444;
 }
 
 a {
-  color: #00B7FF;
+    color: #396eb2;
+    text-decoration: none;
+}
+
+
+.reserve_item {
+    width: 500px;
+    float: left;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.cover_image {
+    float: left;
+    padding-right: 10px;
 }
