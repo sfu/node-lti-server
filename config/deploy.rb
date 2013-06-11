@@ -53,7 +53,7 @@ namespace :node do
 
     desc "Create log an pids directory in shared_path"
     task :create_shared_dirs do
-      run "mkdir p #{shared_path}/{log,pids}"
+      run "mkdir -p #{shared_path}/{log,pids}"
     end
 
     desc "Create node_modules symlink"
