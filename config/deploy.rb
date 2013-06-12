@@ -45,7 +45,7 @@ namespace :deploy do
     end
 
     task :restart do
-      run "/etc/init.d/librarylti restart"
+      run "nohup /sbin/service librarylti restart"
     end
 
 end
