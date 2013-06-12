@@ -37,7 +37,7 @@ app.all('/', routes.index);
 app.get('/isup', routes.isup);
 
 http.createServer(app).listen(app.get('port'), function() {
-    console.log('Express server listening on port ' + app.get('port'));
+    console.log('Express server listening on port %s, PID %s', app.get('port'), process.pid);
 });
 
 process.title = 'library-reserves-lti-server';
