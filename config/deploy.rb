@@ -17,8 +17,12 @@ set :deploy_to,     "/var/nodeapps/library-reserves-lti-server"
 set :use_sudo,      false
 set :node_env,      "production"
 default_run_options[:pty] = true
-ssh_options[:paranoid] = false
-ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "id_rsa")]
+ssh_options[:forward_agent] = true
+ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "id_rsa_nodeuser")]
+
+if (ENV.has_key?('gateway') && ENV['gateway'].downcase == "true")
+  set :gateway, "welcome.its.sfu.ca"
+end
 
 # this tells capistrano what to do when you deploy
 namespace :deploy do
