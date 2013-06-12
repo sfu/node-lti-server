@@ -41,3 +41,7 @@ http.createServer(app).listen(app.get('port'), function() {
 });
 
 process.title = 'library-reserves-lti-server';
+process.on('SIGTERM', function() {
+    logger.warn('received SIGTERM request, stopping library-reserves-lti-server PID: ' + process.pid);
+    process.exit(0);
+});
