@@ -9,7 +9,7 @@ def current_git_branch
 end
 
 set :application,   "library-reserves-lti-server"
-set :repository,    "git@github.com:sfu/library-reserves-lti-server.git"
+set :repository,    "git://github.com/sfu/library-reserves-lti-server.git"
 set :scm,           :git
 set :user,          "nodeuser"
 set :deploy_via,    :remote_cache
