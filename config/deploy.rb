@@ -33,7 +33,6 @@ namespace :deploy do
   task :default do
     transaction do
       update_code
-      node.create_shared_dirs
       node.npminstall
       symlink
     end
@@ -68,5 +67,6 @@ namespace :node do
     end
 end
 
+after("deploy:setup", "node:create_shared_dirs")
 after(:deploy, "deploy:restart")
 after "deploy:restart", "deploy:cleanup"
