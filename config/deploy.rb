@@ -30,7 +30,6 @@ namespace :deploy do
     transaction do
       update_code
       node.create_shared_dirs
-      # node.node_modules_symlink
       node.npminstall
       symlink
     end
@@ -42,9 +41,7 @@ namespace :deploy do
     end
 
     task :restart do
-        # find_servers_for_task(current_task).each do |server|
-        #     run_locally "ssh #{user}@#{server} /etc/init.d/roadconditions restart"
-        # end
+      run "/etc/init.d/librarylti restart"
     end
 
 end
