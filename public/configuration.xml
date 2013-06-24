@@ -8,7 +8,7 @@
     http://www.imsglobal.org/xsd/imsbasiclti_v1p0 http://www.imsglobal.org/xsd/lti/ltiv1p0/imsbasiclti_v1p0.xsd
     http://www.imsglobal.org/xsd/imslticm_v1p0 http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticm_v1p0.xsd
     http://www.imsglobal.org/xsd/imslticp_v1p0 http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticp_v1p0.xsd">
-    <blti:launch_url>http://nodejsf.its.sfu.ca:3001</blti:launch_url>
+    <blti:launch_url>https://nodejsf.its.sfu.ca:3001</blti:launch_url>
     <blti:title>Library Reserves</blti:title>
     <blti:description>Displays items held on reserve by the SFU Library for the course</blti:description>
     <blti:extensions platform="canvas.instructure.com">
