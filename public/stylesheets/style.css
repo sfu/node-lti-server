@@ -19,16 +19,3 @@ a {
     color: #396eb2;
     text-decoration: none;
 }
-
-
-.reserve_item {
-    width: 500px;
-    float: left;
-    margin-bottom: 20px;
-    margin-right: 20px;
-}
-
-.cover_image {
-    float: left;
-    padding-right: 10px;
-}

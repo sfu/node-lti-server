@@ -3,7 +3,8 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="//javascripts/jquery-1.10.1.min.js"></script>
+    <link rel='stylesheet' href='/libraryReserves/stylesheets/style.css' />
+    <script src="/javascripts/jquery-1.10.1.min.js"></script>
   </head>
   <body>
     <h1>Library Reserves for <%= course.context_title %></h1>
@@ -14,6 +15,6 @@
                 <% include reserve_item %>
             <% }) %>
     <% } %>
-    <script src="javascripts/imgreplacer.js"></script>
+    <script src="libraryReserves/javascripts/imgreplacer.js"></script>
   </body>
 </html>
