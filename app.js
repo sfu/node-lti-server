@@ -36,8 +36,9 @@ app.configure('production', function() {
 app.all('/', routes.index);
 app.get('/isup', routes.isup);
 
-http.createServer(app).listen(app.get('port'), function() {
-    console.log('Express server listening on port %s, PID %s', app.get('port'), process.pid);
+app.listen(app.get('port'), function() {
+    console.log('LTI server listening on port %s, PID %s', app.get('port'), process.pid);
+    process.title = 'ltiserver';
 });
 
 process.title = 'ltiserver';
