@@ -41,7 +41,6 @@ app.listen(app.get('port'), function() {
     process.title = 'ltiserver';
 });
 
-process.title = 'ltiserver';
 process.on('SIGTERM', function() {
     console.log('received SIGTERM request, stopping node-lti-server PID: %s', process.pid);
     process.exit(0);
