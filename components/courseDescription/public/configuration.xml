@@ -14,7 +14,7 @@
   <blti:icon>https://nodejsf.its.sfu.ca:3001/courseDescription/images/sfu.png</blti:icon>
   <blti:launch_url>https://nodejsf.its.sfu.ca:3001/courseDescription</blti:launch_url>
   <blti:extensions platform="canvas.instructure.com">
-    <lticm:property name="tool_id">wiktionary</lticm:property>
+    <lticm:property name="tool_id">courseDescription</lticm:property>
     <lticm:property name="privacy_level">public</lticm:property>
     <lticm:options name="editor_button">
       <lticm:property name="url">https://nodejsf.its.sfu.ca:3001/courseDescription</lticm:property>
