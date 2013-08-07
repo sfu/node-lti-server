@@ -28,7 +28,7 @@ app.configure('development', function() {
 app.configure('production', function() {
     app.use(function(error, req, res, next) {
         res.status(500);
-        res.render('500', {title: 'Library Reserves'});
+        res.render('500', {title: 'LTI Server'});
         console.log(error.stack);
     });
 });
@@ -40,8 +40,8 @@ http.createServer(app).listen(app.get('port'), function() {
     console.log('Express server listening on port %s, PID %s', app.get('port'), process.pid);
 });
 
-process.title = 'library-reserves-lti-server';
+process.title = 'ltiserver';
 process.on('SIGTERM', function() {
-    console.log('received SIGTERM request, stopping library-reserves-lti-server PID: %s', process.pid);
+    console.log('received SIGTERM request, stopping node-lti-server PID: %s', process.pid);
     process.exit(0);
 });
