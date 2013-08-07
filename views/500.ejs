@@ -6,6 +6,6 @@
   </head>
   <body>
     <h1>Sorry, an error happened</h1>
-    <p>Please try again later</p>
+    <p><%= locals.hasOwnProperty('message') ? message : "Please try again later"%></p>
   </body>
 </html>
