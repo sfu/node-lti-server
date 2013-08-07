@@ -1,10 +1,10 @@
 {
-  "name": "library-reserves-lti-server",
+  "name": "node-lti-server",
   "author": "Graham Ballantyne <grahamb@sfu.ca",
-  "description": "An express-based server to provide an LTI interface to the SFU Library's course reserves API",
+  "description": "An express-based server to provide an intermediate server for LTI usage from Canvas",
   "repository": {
       "type": "git",
-      "url": "https://github.com/sfu/library-reserves-lti-server.git"
+      "url": "https://github.com/sfu/node-lti-server.git"
   },
   "version": "0.0.1",
   "private": true,
@@ -12,9 +12,9 @@
     "start": "node app"
   },
   "dependencies": {
-    "express": "3.0.0rc5",
+    "express": "3.3.x",
     "ejs": "*",
     "css": "*",
-    "request": "2.21.x"
+    "request": "2.x"
   }
 }
