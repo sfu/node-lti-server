@@ -26,7 +26,7 @@ start() {
         echo "$PIDFILE exists, node-lti-server is already running or crashed ($PID)"
     else
         echo -n "Starting node-lti-server..."
-        NODE_ENV=production $NODE $SCRIPT >> $LOGFILE 2>&1 &
+        NODE_ENV=production PORT=$PORT $NODE $SCRIPT >> $LOGFILE 2>&1 &
         echo_success || echo_failure
         echo $! > $PIDFILE
         chown $RUN_AS_USER $PIDFILE
