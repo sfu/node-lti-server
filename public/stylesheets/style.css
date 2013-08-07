@@ -1,5 +1,8 @@
-body {
+* {
     font: 13px/1.5 'Helvetica Neue', Arial, 'Liberation Sans', FreeSans, sans-serif;
+}
+
+body {
     font-size: 75%;
     color: #333;
     padding-left: 10px;

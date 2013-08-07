@@ -1,0 +1,31 @@
+<%
+    var courseName = [ data.course[1].toUpperCase(), data.course[2] ].join(' ') + ' &ndash; ' + data.term.name;
+%>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Course Description</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/courseDescription/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Insert Course Description</h1>
+    <p>The course description below was retreived from the <a href="http://www.sfu.ca/calendar" target=_blank>SFU Academic Calendar</a>. Click <strong>Insert Description</strong> to insert the course description into your page.</p>
+    <div class="description">
+        <h2><%= courseName %></h2>
+        <p class="descriptionBody"><%= data.description %></p>
+    </div>
+    <div class="form-actions">
+        <span class="report_error">If you believe this information is in error, please contact your department&apos;s program chair.</span>
+        <button id="insertDescription" class="btn btn-primary">Insert Description</button>
+    </div>
+    <script>
+        var lti = {
+            launch_presentation_return_url: "<%= data.lti.launch_presentation_return_url %>",
+            courseUrl: "<%= data.course.url %>",
+            description: document.querySelector('.descriptionBody').innerHTML
+        };
+    </script>
+    <script src="/courseDescription/javascripts/app.js"></script>
+  </body>
+</html>
