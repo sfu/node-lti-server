@@ -3,11 +3,8 @@
  */
 
 var express = require('express'),
-    routes = require('./routes'),
-    http = require('http'),
+    app = express(),
     path = require('path');
-
-var app = express();
 
 app.configure(function() {
     app.set('port', process.env.PORT || 3000);
@@ -33,8 +30,8 @@ app.configure('production', function() {
     });
 });
 
-app.all('/', routes.index);
-app.get('/isup', routes.isup);
+// Require components
+require('./components')(app, express);
 
 app.listen(app.get('port'), function() {
     console.log('LTI server listening on port %s, PID %s', app.get('port'), process.pid);
