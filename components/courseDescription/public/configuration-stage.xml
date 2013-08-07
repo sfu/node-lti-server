@@ -19,7 +19,7 @@
     <lticm:options name="editor_button">
       <lticm:property name="url">http://node-stage.its.sfu.ca:3001/courseDescription</lticm:property>
       <lticm:property name="icon_url">http://node-stage.its.sfu.ca:3001/courseDescription/images/sfu.png</lticm:property>
-      <lticm:property name="text">SFU Course Descriptions</lticm:property>
+      <lticm:property name="text">SFU Course Descriptions STAGE</lticm:property>
       <lticm:property name="selection_width">720</lticm:property>
       <lticm:property name="selection_height">420</lticm:property>
       <lticm:property name="enabled">true</lticm:property>
