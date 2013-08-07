@@ -8,12 +8,12 @@ def current_git_branch
   branch
 end
 
-set :application,   "library-reserves-lti-server"
-set :repository,    "git://github.com/sfu/library-reserves-lti-server.git"
+set :application,   "node-lti-server"
+set :repository,    "git://github.com/sfu/node-lti-server.git"
 set :scm,           :git
 set :user,          "nodeuser"
 set :deploy_via,    :remote_cache
-set :deploy_to,     "/var/nodeapps/library-reserves-lti-server"
+set :deploy_to,     "/var/nodeapps/node-lti-server"
 set :use_sudo,      false
 set :node_env,      "production"
 default_run_options[:pty] = true
@@ -44,7 +44,7 @@ namespace :deploy do
     end
 
     task :restart do
-      run "nohup /sbin/service librarylti restart"
+      run "nohup /sbin/service ltiserver restart"
     end
 
 end
