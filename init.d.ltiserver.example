@@ -1,11 +1,11 @@
 #!/bin/sh
 #
-# library-reserves-lti-server        Startup script for the library reserves LTI server
+# node-lti-server        Startup script for the library reserves LTI server
 #
 # chkconfig: 3 4 5
 #
-# processname: library-reserves-lti-server
-# pidfile: /var/nodeapps/library-reserves-lti-server/shared/pids/library-reserves-lti-server.pid
+# processname: node-lti-server
+# pidfile: /var/nodeapps/node-lti-server/shared/pids/node-lti-server.pid
 
 . /etc/rc.d/init.d/functions
 
@@ -13,19 +13,19 @@ PATH=/usr/local/bin:/sbin:/usr/bin:/bin
 
 NODE='/usr/local/bin/node'
 PORT=3001
-APP_DIR='/var/nodeapps/library-reserves-lti-server/current'
-SHARED_DIR='/var/nodeapps/library-reserves-lti-server/shared'
+APP_DIR='/var/nodeapps/node-lti-server/current'
+SHARED_DIR='/var/nodeapps/node-lti-server/shared'
 SCRIPT="$APP_DIR/app.js"
-PIDFILE="$SHARED_DIR/pids/library-reserves-lti-server.pid"
-LOGFILE="$SHARED_DIR/log/library-reserves-lti-server.log"
+PIDFILE="$SHARED_DIR/pids/node-lti-server.pid"
+LOGFILE="$SHARED_DIR/log/node-lti-server.log"
 RUN_AS_USER=nodeuser
 
 start() {
     if [ -f $PIDFILE ] ; then
         PID=$(cat $PIDFILE)
-        echo "$PIDFILE exists, library-reserves-lti-server is already running or crashed ($PID)"
+        echo "$PIDFILE exists, node-lti-server is already running or crashed ($PID)"
     else
-        echo -n "Starting library-reserves-lti-server..."
+        echo -n "Starting node-lti-server..."
         NODE_ENV=production $NODE $SCRIPT >> $LOGFILE 2>&1 &
         echo_success || echo_failure
         echo $! > $PIDFILE
@@ -35,7 +35,7 @@ start() {
 }
 
 stop() {
-        echo -n "Stopping library-reserves-lti-server..."
+        echo -n "Stopping node-lti-server..."
     if [ ! -f $PIDFILE ] ; then
         echo -n " process is not running"
                 echo_failure
