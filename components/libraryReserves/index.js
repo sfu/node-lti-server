@@ -10,7 +10,6 @@ module.exports = function(app) {
 
         // get the course id
         var courseSisId, qs;
-        console.log(req.body);
         courseSisId = req.body.lis_course_offering_sourcedid ? req.body.lis_course_offering_sourcedid.split('-') : null;
         if (!courseSisId) {
             res.status(500);
