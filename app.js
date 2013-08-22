@@ -11,7 +11,16 @@ app.configure(function() {
     app.set('views', __dirname + '/views');
     app.set('view engine', 'ejs');
     app.use(express.favicon());
-    app.use(express.logger('dev'));
+    express.logger.token('localtime', function(req, res) {
+        return new Date().toString();
+    });
+    express.logger.token('remote-ip', function(req, res) {
+        return req.headers['x-forwarded-for'] ? req.headers['x-forwarded-for'] : (req.socket && (req.socket.remoteAddress || (req.socket.socket && req.socket.socket.remoteAddress)));
+
+    });
+    app.use(express.logger({
+        format: ':remote-ip - - [:localtime] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" :response-time'
+    }));
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(app.router);
