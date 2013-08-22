@@ -7,7 +7,14 @@ module.exports = function(app) {
             return;
         }
 
-        var course = req.body.lis_course_offering_sourcedid.split('-');
+        var course = req.body.hasOwnProperty('lis_course_offering_sourcedid') ? req.body.lis_course_offering_sourcedid.split('-') : null;
+
+        if (!course || course[0] === 'sandbox') {
+            res.status(404);
+            res.render(path.join(__dirname, 'views/no_course'));
+            return false;
+        }
+
         request({
             url: 'https://canvas.sfu.ca/sfu/api/v1/terms/' + course[0]
         }, function(err, resp, termData) {
