@@ -9,7 +9,7 @@ module.exports = function(app) {
 
         var course = req.body.lis_course_offering_sourcedid.split('-');
         request({
-            url: 'https://canvas-stage.sfu.ca/sfu/api/v1/terms/' + course[0]
+            url: 'https://canvas.sfu.ca/sfu/api/v1/terms/' + course[0]
         }, function(err, resp, termData) {
             var termName = JSON.parse(termData)[0].name.split(' ');
             var courseDescUrl = 'http://www.sfu.ca/content/sfu/students/calendar/' + termName[1] + '/' + termName[0].toLowerCase() + '/courses/' + course[1] + '/' + course[2] + '/jcr:content/description.json';
