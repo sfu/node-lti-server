@@ -12,10 +12,7 @@ module.exports = function(app) {
             url: 'https://canvas.sfu.ca/sfu/api/v1/terms/' + course[0]
         }, function(err, resp, termData) {
             var termName = JSON.parse(termData)[0].name.split(' ');
-            var courseDescUrl = 'http://www.sfu.ca/content/sfu/students/calendar/' + termName[1] + '/' + termName[0].toLowerCase() + '/courses/' + course[1] + '/' + course[2] + '/jcr:content/description.json';
-            if ('development' === process.env.NODE_ENV) {
-                courseDescUrl = 'http://www.sfu.ca/content/sfu/students/calendar/2013/fall/courses/fpa/104/jcr:content/description.json'
-            }
+            var courseDescUrl = 'http://www.sfu.ca/content/sfu/students/calendar/' + termName[1] + '/' + termName[0].toLowerCase() + '/courses/' + course[1] + '/' + course[2].toLowerCase() + '/jcr:content/description.json';
             request({
                 url: courseDescUrl
             }, function(err, resp, descriptionBody) {
