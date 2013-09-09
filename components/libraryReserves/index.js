@@ -26,10 +26,20 @@ module.exports = function(app) {
                 section: courseSisId[3]
             }
         }, function(err, resp, body) {
+            if (err) {
+                renderError();
+                app.logger.error('Error getting data from library:\n\n', err.toString());
+                return false;
+            }
+            function renderError() {
+                res.render(500, {title: 'An Error Occurred', message: 'We&amp;re sorry, but an error occured while fetching your Library Reserves. Please try again later.'});
+            };
+
             try {
                 body = JSON.parse(body);
             } catch (e) {
-                res.render(500, {title: 'An Error Occurred', message: 'We&amp;re sorry, but an error occured while fetching your Library Reserves. Please try again later.'});
+                renderError();
+                app.logger.error('Error parsing data from library; does not appear to be valid JSON.\n\n', body, err.toString(), JSON.stringify(resp, null, '  '));
                 return false;
             }
             res.render(path.join(__dirname, 'views/index'), { data: body, course: req.body, title: 'Library Reserves' });

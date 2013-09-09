@@ -4,7 +4,38 @@
 
 var express = require('express'),
     app = express(),
-    path = require('path');
+    path = require('path'),
+    os = require('os'),
+    winston = require('winston');
+
+
+// Logging
+require('winston-mail').Mail;
+app.logger = new (winston.Logger)({
+    transports: [
+        new (winston.transports.Console)({
+            timestamp: function() { return new Date().toString(); },
+            handleExceptions: true
+        }),
+        new (winston.transports.Mail)({
+            to: 'nodejsapps-logger@sfu.ca',
+            host: 'mailgate.sfu.ca',
+            from: process.title + '@' + os.hostname(),
+            subject: new Date().toString() + ' ' + process.title + ': {{level}} {{msg}}',
+            tls: true,
+            level: 'error',
+            timestamp: function() { return new Date().toString(); },
+            handleExceptions: true
+        })
+    ]
+});
+
+var winstonStream = {
+    write: function(str) {
+        str = str.replace(/(\n|\r)+$/, '');
+        app.logger.info(str);
+    }
+};
 
 app.configure(function() {
     app.set('port', process.env.PORT || 3000);
@@ -19,6 +50,7 @@ app.configure(function() {
 
     });
     app.use(express.logger({
+        stream: winstonStream,
         format: ':remote-ip - - [:localtime] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent" :response-time'
     }));
     app.use(express.bodyParser());
