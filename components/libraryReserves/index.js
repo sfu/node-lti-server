@@ -39,7 +39,7 @@ module.exports = function(app) {
                 body = JSON.parse(body);
             } catch (e) {
                 renderError();
-                app.logger.error('Error parsing data from library; does not appear to be valid JSON.\n\n', body, err.toString(), JSON.stringify(resp, null, '  '));
+                app.logger.error('Error parsing data from library; does not appear to be valid JSON.\n\n', body, JSON.stringify(resp, null, '  '));
                 return false;
             }
             res.render(path.join(__dirname, 'views/index'), { data: body, course: req.body, title: 'Library Reserves' });
