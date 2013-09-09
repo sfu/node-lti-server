@@ -26,7 +26,13 @@ module.exports = function(app) {
                 section: courseSisId[3]
             }
         }, function(err, resp, body) {
-            res.render(path.join(__dirname, 'views/index'), { data: JSON.parse(body), course: req.body, title: 'Library Reserves' });
+            try {
+                body = JSON.parse(body);
+            } catch (e) {
+                res.render(500, {title: 'An Error Occurred', message: 'We&amp;re sorry, but an error occured while fetching your Library Reserves. Please try again later.'});
+                return false;
+            }
+            res.render(path.join(__dirname, 'views/index'), { data: body, course: req.body, title: 'Library Reserves' });
         });
     });
 
