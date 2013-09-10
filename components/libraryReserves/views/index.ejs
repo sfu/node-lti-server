@@ -8,6 +8,7 @@
   </head>
   <body>
     <h1>Library Reserves for <%= course.context_title %></h1>
+    <% include support_contact %>
     <% if (data.reserves_count === 0) { %>
         <p>There are no items on reserve for this course.</p>
     <% } else { %>

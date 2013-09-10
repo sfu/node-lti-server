@@ -9,3 +9,7 @@
     float: left;
     padding-right: 10px;
 }
+
+.support_contact * {
+    font-size: 11px;
+}
