@@ -10,7 +10,7 @@ module.exports = function(app) {
 
         // get the course id
         var courseSisId, qs;
-        courseSisId = req.body.lis_course_offering_sourcedid ? req.body.lis_course_offering_sourcedid.split('-') : null;
+        courseSisId = req.body.lis_course_offering_sourcedid ? req.body.lis_course_offering_sourcedid.split(':')[0].split('-') : null;
         if (!courseSisId) {
             res.status(500);
             res.render('500', {title: 'Non-Credit Course', message: 'This does not appear to be a credit course.'});
