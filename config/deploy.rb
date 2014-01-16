@@ -25,6 +25,10 @@ if (ENV.has_key?('gateway') && ENV['gateway'].downcase == "true")
   set :gateway, "welcome.its.sfu.ca"
 end
 
+if (ENV.has_key?('branch'))
+   set :branch, ENV['branch']
+end
+
 # this tells capistrano what to do when you deploy
 namespace :deploy do
 
