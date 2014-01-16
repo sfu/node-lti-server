@@ -11,6 +11,7 @@ end
 set :application,   "node-lti-server"
 set :repository,    "git://github.com/sfu/node-lti-server.git"
 set :scm,           :git
+set :branch,        "master"
 set :user,          "nodeuser"
 set :deploy_via,    :remote_cache
 set :deploy_to,     "/var/nodeapps/node-lti-server"
