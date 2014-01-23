@@ -25,20 +25,16 @@ module.exports = function(app) {
             }
         }
 
-        if (req.method !== 'POST') {
-            res.send(405);
-            return;
-        }
-
         // get the course id
         var courseSisId, courses, qs;
-        courseSisId = req.body.lis_course_offering_sourcedid ? req.body.lis_course_offering_sourcedid : null;
+        courseSisId = (req.body.lis_course_offering_sourcedid  || req.query.lis_course_offering_sourcedid) ? (req.body.lis_course_offering_sourcedid || req.query.lis_course_offering_sourcedid) : null;
         if (!courseSisId) {
             res.status(500);
             res.render('500', {title: 'Non-Credit Course', message: 'This does not appear to be a credit course.'});
             return false;
         }
 
+        courseSisId = courseSisId.split(':')[0].split('-');
         courses = courseSisId.split(':');
         courses.forEach(function(course) {
             course = course.split('-');
