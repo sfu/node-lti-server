@@ -34,7 +34,6 @@ module.exports = function(app) {
             return false;
         }
 
-        courseSisId = courseSisId.split(':')[0].split('-');
         courses = courseSisId.split(':');
         courses.forEach(function(course) {
             course = course.split('-');
