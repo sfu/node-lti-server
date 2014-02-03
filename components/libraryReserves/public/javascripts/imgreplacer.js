@@ -1,5 +1,12 @@
 $('.cover_image').load(function() {
-    if (this.width === 1) {
-        this.src = "/libraryReserves/images/no_cover_image.png";
+
+    var img = new Image();
+    var self = this;
+    img.onload = function() {
+        if (img.width === 1) {
+            self.src = "/libraryReserves/images/no_cover_image.png";
+        }
     }
+
+    img.src = this.src;
 });
