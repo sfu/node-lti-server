@@ -32,7 +32,7 @@ h1,h4 { color: #6B6B6B; }
     width: 80%;
 }
 
-div.overviewList:after {
+.clearfix:after {
   content: "";
   display: table;
   clear: both;
@@ -65,4 +65,19 @@ div.disclaimer {
 }
 div.disclaimer * {
     font-style: italic;
+}
+
+ul#outlineSwitcher {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+#outlineSwitcher li {
+    float: left;
+    padding-right: 20px;
+}
+
+.gradeItemDescription {
+    display: inline-block;
+    width: 200px;
 }
