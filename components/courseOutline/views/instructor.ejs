@@ -1,0 +1,15 @@
+<h3><%=: course.instructor.length | pluralize: 'Instructor' %></h3>
+<div class="overviewList clearfix">
+<ul>
+  <% course.instructor.forEach(function(instructor) { %>
+    <li>
+      <h4><%= instructor.name %></h4>
+      <a href="mailto:<%= instructor.email %>"><%= instructor.email %></a>
+      <% if (instructor.phone) { %>
+      <br>
+      <%= instructor.phone %>
+      <% } %>
+    </li>
+  <% }) %>
+  </ul>
+</div>

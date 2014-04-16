@@ -1,0 +1,58 @@
+<div class="courseOutline" id="<%= course.sisId %>">
+  <h1><%= course.info.term %> - <%= course.info.name %> </h1>
+  <h2><%= course.info.title %></h2>
+
+  <% if (course.info.deliveryMethod) { %>
+    <p>Delivery Method: <%= course.info.deliveryMethod %></p>
+  <% } %>
+
+  <h3>Description</h3>
+  <h4>Calendar Description</h4>
+  <div class="userTextContent"><p><%= course.info.description %></p></div>
+
+  <% if (course.info.courseDetails) { %>
+    <h4>Course Details</h4>
+    <div class="userTextContent"><%- course.info.courseDetails %></div>
+  <% } %>
+
+  <% if (course.info.prerequisites) { %>
+    <h4>Prerequisites</h4>
+    <p><%= course.info.prerequisites %></p>
+  <% } %>
+
+  <% if (course.info.corequisites) { %>
+    <h4>Corequisites</h4>
+    <p><%= course.info.corequisites %></p>
+  <% } %>
+
+  <% if (course.info.educationalGoals) { %>
+    <h4>Educational Goals</h4>
+    <div class="userTextContent"><%- course.info.educationalGoals %></div>
+  <% } %>
+
+  <% include schedule %>
+
+  <% if (course.instructor) { %>
+    <% include instructor %>
+  <% } %>
+
+
+  <% if (course.info.gradingNotes || course.grades) { %>
+    <% include grading %>
+  <% } %>
+
+
+  <% if (course.info.materials || course.requiredText || course.recommendedText ) { %>
+    <h3>Materials</h3>
+    <%- course.info.materials %>
+    <% include texts %>
+  <% } %>
+
+
+  <% include additionalNotes %>
+
+  <div class="disclaimer">
+    <p>Notice: This course outline was generated from data provided by the <a href="http://www.sfu.ca/outlines.html">SFU Course Outlines</a> system. In case of any discrepancy between this outline and the <a href="http://www.sfu.ca/outlines.html/<%= course.info.nodePath %>">official outline</a>, the latter shall be considered authoratative.</p>
+    <p>Instructors: visit <a href="http://outlines.sfu.ca">http://outlines.sfu.ca</a> to update this course outline</p>
+  </div>
+</div>

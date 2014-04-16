@@ -1,0 +1,26 @@
+<h3>Schedule</h3>
+<div class="overviewList clearfix">
+  <ul>
+    <li>
+      <h4>Course Times</h4>
+      <% if (!course.courseSchedule || course.courseSchedule.length === 0) { %>
+      <p>TBA</p>
+      <% } else { %>
+        <% course.courseSchedule.forEach(function(schedule) { %>
+        <p><%= schedule.buildingCode %><%= schedule.roomNumber %><br/><%= schedule.days %> <%= schedule.startTime %> - <%= schedule.endTime %></p>
+        <% }) %>
+      <% } %>
+    </li>
+
+    <li>
+      <h4>Exam Times</h4>
+      <% if (!course.examSchedule || course.examSchedule.length === 0) { %>
+      <p>TBA</p>
+      <% } else { %>
+        <% course.examSchedule.forEach(function(schedule) { %>
+        <p><%= schedule.buildingCode %><%= schedule.roomNumber %><br/><%= schedule.days %> <%= schedule.startTime %> - <%= schedule.endTime %></p>
+        <% }) %>
+      <% } %>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Course Outline</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/courseOutline/stylesheets/style.css' />
+    <meta name="viewport" content="width=device-width">
+    <script src="/javascripts/jquery-1.10.1.min.js"></script>
+    <base target="_parent" />
+  </head>
+  <body>
+    <% if (outlines.length === 0) { %>
+        <p>A course outline could not be found for this course.</p>
+    <% } else { %>
+            <% if (outlines.length > 1) { %>
+              <p>This is a cross-listed course. Select an outline to view:</p>
+              <div class="clearfix">
+                <ul id="outlineSwitcher">
+                <% outlines.forEach(function(course) { %>
+                  <li><a href="#" data-sisId="<%= course.sisId %>"><%= course.info.name %></a></li>
+                <% }) %>
+                </ul>
+              </div>
+            <% } %>
+            <% outlines.forEach(function(course) { %>
+                <% include outline %>
+            <% }) %>
+    <% } %>
+
+
+    <script>
+      $('.courseOutline').not(':first').hide();
+      $('#outlineSwitcher').on('click', 'a', function(el) {
+        el.preventDefault();
+        var target = $(el.target).data('sisid');
+        $('.courseOutline').hide();
+        $('#'+target).show();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+<div class="additionalNotes">
+  <% if (course.info.degreeLevel === 'UGRD' && course.info.departmentaUgradlNotes) { %>
+    <h3 class="supplemental">Department Undergraduate Notes</h3>
+    <div class="userTextContent"><%- course.info.departmentaUgradlNotes %></div>
+  <% } %>
+
+  <% if (course.info.degreeLevel === 'GRAD' && course.info.departmentaGradlNotes) { %>
+    <h3 class="supplemental">Department Graduate Notes</h3>
+    <div class="userTextContent"><%- course.info.departmentaGradlNotes %></div>
+  <% } %>
+
+  <% if (course.info.degreeLevel === 'GRAD' && course.info.graduateStudiesNotes) { %>
+    <h3 class="supplemental">Graduate Studies Notes</h3>
+    <div class="userTextContent"><%- course.info.graduateStudiesNotes %></div>
+  <% } %>
+
+  <% if (course.info.registrarNotes) { %>
+    <h3 class="supplemental">Registrar Notes</h3>
+    <div class="userTextContent"><p><%- course.info.registrarNotes %></p></div>
+  <% } %>
+</div>

@@ -1,0 +1,20 @@
+<% if (course.requiredText) { %>
+    <h4><%=: course.requiredText.length | pluralize: 'Required Reading' %></h4>
+    <% course.requiredText.forEach(function(text) { %>
+    <div class="readingItem">
+      <div class="userTextContent"><%- text.details %></div>
+      <% if (text.isbn) { %> <p class="isbn">ISBN: <%= text.isbn %></p> <% } %>
+    </div>
+    <% }) %>
+<% } %>
+
+<% if (course.recommendedText) { %>
+    <h4><%=: course.recommendedText.length | pluralize: 'Recommended Reading' %></h4>
+    <% course.recommendedText.forEach(function(text) { %>
+    <div class="readingItem">
+      <div class="userTextContent"><%- text.details %></div>
+      <% if (text.isbn) { %> <p class="isbn">ISBN: <%= text.isbn %></p> <% } %>
+    </div>
+    <% }) %>
+<% } %>
+

@@ -1,0 +1,10 @@
+<h3>Grading</h3>
+  <% if (course.grades) { %>
+    <% course.grades.forEach(function(gradeItem) { %>
+      <p><span class="gradeItemDescription"><%= gradeItem.description %> </span><span class="gradeItemWeight"><%=: gradeItem.weight | append: '%' %></span></p>
+    <% }) %>
+  <% } %>
+  <% if (course.info.gradingNotes) { %>
+    <h4>Grading Notes</h4>
+    <div class="userTextContent"><%- course.info.gradingNotes %></div>
+  <% } %>
