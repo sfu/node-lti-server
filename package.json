@@ -3,8 +3,8 @@
   "author": "Graham Ballantyne <grahamb@sfu.ca",
   "description": "An express-based server to provide an intermediate server for LTI usage from Canvas",
   "repository": {
-      "type": "git",
-      "url": "https://github.com/sfu/node-lti-server.git"
+    "type": "git",
+    "url": "https://github.com/sfu/node-lti-server.git"
   },
   "version": "0.0.1",
   "private": true,
@@ -17,6 +17,7 @@
     "css": "*",
     "request": "2.x",
     "winston": "0.7.x",
-    "winston-mail": "0.2.x"
+    "winston-mail": "0.2.x",
+    "q": "^1.0.1"
   }
 }
