@@ -18,7 +18,21 @@
       <p>TBA</p>
       <% } else { %>
         <% course.examSchedule.forEach(function(schedule) { %>
-        <p><%= schedule.buildingCode %><%= schedule.roomNumber %><br/><%= schedule.days %> <%= schedule.startTime %> - <%= schedule.endTime %></p>
+        <p>
+          <% if (schedule.buildingCode && schedule.roomNumber) { %>
+          <%= schedule.buildingCode %><%= schedule.roomNumber %>
+          <% } else { %>
+          Location TBA
+          <% } %>
+          <br/>
+          <% if (!schedule.startDate || !schedule.startTime || !schedule.endTime) { %>
+          Time &amp; Date TBA
+          <% } else { %>
+          <%=: schedule.startDate | formatDate: 'dddd, MMMM D, YYYY' %>
+          <br/>
+          <%= schedule.startTime %> - <%= schedule.endTime %>
+          <% } %>
+          </p>
         <% }) %>
       <% } %>
     </li>
