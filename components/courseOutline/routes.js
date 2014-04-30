@@ -4,10 +4,10 @@ var outline = require('./lib/outline');
 var cqUrl = 'http://www.sfu.ca/bin/wcm/course-outlines';
 
 exports.index = function(req, res) {
-    function renderError(template, statusCode, data) {
-        template = template || '500';
-        statusCode = statusCode || 500;
-        data = data || {
+    function handleError(reason) {
+        var template = reason.template || 'error';
+        var statusCode = reason.statusCode || 500;
+        var data = reason.data || {
             title: 'An Error Occurred',
             message: 'We&apos;re sorry, but an error occured while fetching the course outline. Please try again later.'
         }
