@@ -6,6 +6,26 @@
     <p>Delivery Method: <%= course.info.deliveryMethod %></p>
   <% } %>
 
+
+  <% include schedule %>
+
+  <% if (course.instructor) { %>
+    <% include instructor %>
+  <% } %>
+
+
+  <% if (course.info.gradingNotes || course.grades) { %>
+    <% include grading %>
+  <% } %>
+
+
+  <% if (course.info.materials || course.requiredText || course.recommendedText ) { %>
+    <h3>Materials</h3>
+    <%- course.info.materials %>
+    <% include texts %>
+  <% } %>
+
+
   <h3>Description</h3>
   <h4>Calendar Description</h4>
   <div class="userTextContent"><p><%= course.info.description %></p></div>
