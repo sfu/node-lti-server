@@ -38,13 +38,13 @@ h1,h4 { color: #6B6B6B; }
   clear: both;
 }
 
-div.overviewList ul {
+.overviewList ul {
     list-style-type: none;
     padding-left: 0;
     margin: 0;
 }
 
-div.overviewList ul li {
+.overviewList ul li {
     padding-left: 0;
     width: 50%;
     float: left;
@@ -80,4 +80,20 @@ ul#outlineSwitcher {
 .gradeItemDescription {
     display: inline-block;
     width: 200px;
+}
+
+.left {
+    float: left;
+}
+
+.instructorProfile {
+    margin-left: 15px;
+}
+
+.overviewList.instructorList ul {
+    margin-top: 1.33em;
+}
+
+.instructorProfile h4 {
+    margin-top: 0;
 }
