@@ -6,7 +6,7 @@ var canvasToken = process.env.CANVAS_TOKEN || '';
 var canvasUrl = 'https://canvas.sfu.ca/api/v1/users/sis_login_id:USERNAME/profile?access_token=' + canvasToken;
 
 
-module.exports.getAllOutlines = function(courses) {
+module.exports.getAllOutlines = function(courses, ltiLaunchParameters) {
     var promises = [];
     courses.forEach(function(course) {
         var deferred = Q.defer();
@@ -30,6 +30,11 @@ module.exports.getAllOutlines = function(courses) {
                     var outline = JSON.parse(body);
                 } catch(JSONError) {
                     deferred.reject(JSONError);
+                }
+                outline.canvas = {
+                    courseId: ltiLaunchParameters.custom_canvas_course_id,
+                    sisId: ltiLaunchParameters.lis_course_offering_sourcedid,
+                    courseUrl: ltiLaunchParameters.launch_presentation_return_url
                 }
                 deferred.resolve(outline);
             }
