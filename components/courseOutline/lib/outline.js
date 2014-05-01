@@ -44,36 +44,50 @@ module.exports.getAllOutlines = function(courses, ltiLaunchParameters) {
     return Q.all(promises);
 };
 
-module.exports.getCanvasProfiles = function(outlines) {
-    var outlineCounter = 0;
-    var deferred = Q.defer();
+module.exports.getCanvasProfilesForAllCourses = function(outlines) {
+    var promises = [];
     outlines.forEach(function(outline) {
-        outlineCounter++;
-        var instructorCount = outline.hasOwnProperty('instructor') ? outline.instructor.length : 0;
-        var instructorCounter = 0;
-        if (instructorCount > 0) {
-            outline.instructor.forEach(function(instructor, i) {
-                var computingId = instructor.email.split('@')[0];
-                var url = canvasUrl.replace('USERNAME', computingId);
-                request(url, function(err, response, body) {
-                    if (err) { deferred.reject(err); }
-                    else {
-                        try {
-                            body = JSON.parse(body);
-                        } catch (JSONError) {
-                            deferred.reject(JSONError);
-                        }
-                        outline.instructor[i]['canvas'] = body;
-                        instructorCounter++
-                        if (instructorCounter === instructorCount) {
-                            if (outlineCounter === outlines.length) {
-                                deferred.resolve(outlines);
-                            }
-                        }
-                    }
-                });
-            });
+        promises.push(getCanvasProfilesForCourse(outline));
+    });
+    return Q.all(promises);
+};
+
+var getCanvasProfilesForCourse = function(outline) {
+    var numInstructors = outline.instructor.length || 0;
+    var deferred = Q.defer();
+    var promises = [];
+    for (var i = 0; i < numInstructors; i++) {
+        promises.push(getCanvasProfileForInstructor(outline.instructor[i]));
+    };
+
+    Q.all(promises).then(function(profiles) {
+        profiles.forEach(function(profile, idx, array) {
+            outline.instructor[idx] = profile;
+        });
+        deferred.resolve(outline);
+    });
+
+    return deferred.promise;
+};
+
+ var getCanvasProfileForInstructor = function(instructor) {
+    var deferred = Q.defer();
+    var id = instructor.email.split('@')[0];
+    var url = canvasUrl.replace('USERNAME', id);
+
+    request(url, function(err, response, body) {
+        var profile;
+        if (err || response.statusCode !== 200) {
+            deferred.reject();
+        } else {
+            try {
+                profile = JSON.parse(body);
+            } catch(JSONError) {
+                deferred.reject();
+            }
+            instructor.canvas = profile;
+            deferred.resolve(instructor);
         }
     });
     return deferred.promise;
-};
+}
