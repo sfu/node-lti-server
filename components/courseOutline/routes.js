@@ -20,7 +20,6 @@ exports.index = function(req, res) {
     }
 
     var courses = utils.coursesFromSisId(req.body.lis_course_offering_sourcedid || null);
-    console.log(courses);
     if (!courses) {
         renderError('500', 500, {title: 'Non-Credit Course', message: 'This does not appear to be a credit course.'});
         return false;
