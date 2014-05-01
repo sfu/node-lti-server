@@ -1,5 +1,5 @@
-<div class="courseOutline" id="<%= course.sisId %>">
-  <h1><%= course.info.term %> - <%= course.info.name %> </h1>
+<div class="courseOutline" id="<%= course.info.nodePath.replace(/\//g, '-') %>">
+  <h1><%= course.info.term %> - <%= course.info.name %></h1>
   <h2><%= course.info.title %></h2>
 
   <% if (course.info.deliveryMethod) { %>
@@ -50,29 +50,11 @@
     <div class="userTextContent"><%- course.info.educationalGoals %></div>
   <% } %>
 
-  <% include schedule %>
-
-  <% if (course.instructor) { %>
-    <% include instructor %>
-  <% } %>
-
-
-  <% if (course.info.gradingNotes || course.grades) { %>
-    <% include grading %>
-  <% } %>
-
-
-  <% if (course.info.materials || course.requiredText || course.recommendedText ) { %>
-    <h3>Materials</h3>
-    <%- course.info.materials %>
-    <% include texts %>
-  <% } %>
-
 
   <% include additionalNotes %>
 
   <div class="disclaimer">
-    <p>Notice: This course outline was generated from data provided by the <a href="http://www.sfu.ca/outlines.html">SFU Course Outlines</a> system. In case of any discrepancy between this outline and the <a href="http://www.sfu.ca/outlines.html/<%= course.info.nodePath %>">official outline</a>, the latter shall be considered authoratative.</p>
+    <p>Notice: This course outline was generated from data provided by the <a href="http://www.sfu.ca/outlines.html">SFU Course Outlines</a> system.<br/>In case of any discrepancy between this outline and the <a href="http://www.sfu.ca/outlines.html/<%= course.info.nodePath %>">official outline</a>, the latter shall be considered authoratative.</p>
     <p>Instructors: visit <a href="http://outlines.sfu.ca">http://outlines.sfu.ca</a> to update this course outline</p>
   </div>
 </div>
