@@ -25,7 +25,7 @@ exports.index = function(req, res) {
         return false;
     }
 
-    var promise = outline.getAllOutlines(courses);
-    promise.fail(handleError);
-    promise.then(outline.getCanvasProfiles).then(renderOutline, handleError);
+    outline.getAllOutlines(courses, req.body).
+        then(outline.getCanvasProfilesForAllCourses, handleError).
+        then(renderOutline, handleError);
 }
