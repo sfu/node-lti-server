@@ -33,7 +33,6 @@
       $('#outlineSwitcher').on('click', 'a', function(el) {
         el.preventDefault();
         var target = $(el.target).data('nodepath');
-        console.log(target);
         $('.courseOutline').hide();
         $('#'+target).show();
       });
