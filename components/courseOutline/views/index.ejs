@@ -16,8 +16,8 @@
               <p>This is a cross-listed course. Select an outline to view:</p>
               <div class="clearfix">
                 <ul id="outlineSwitcher">
-                <% outlines.forEach(function(course) { %>
-                  <li><a href="#" data-sisId="<%= course.sisId %>"><%= course.info.name %></a></li>
+                <% outlines.forEach(function(course) { var nodepath = course.info.nodePath.replace(/\//g, '-'); %>
+                  <li><a href="#" data-nodepath="<%= nodepath %>"><%= course.info.name %></a></li>
                 <% }) %>
                 </ul>
               </div>
@@ -32,7 +32,8 @@
       $('.courseOutline').not(':first').hide();
       $('#outlineSwitcher').on('click', 'a', function(el) {
         el.preventDefault();
-        var target = $(el.target).data('sisid');
+        var target = $(el.target).data('nodepath');
+        console.log(target);
         $('.courseOutline').hide();
         $('#'+target).show();
       });
