@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= locals.hasOwnProperty('title') ? title : "Sorry, an error happened"%></h1>
+    <p><%= locals.hasOwnProperty('message') ? message : "Please try again later."%></p>
+  </body>
+</html>
