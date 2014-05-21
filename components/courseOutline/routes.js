@@ -1,6 +1,5 @@
 var utils = require('../../lib/utils');
 var outline = require('./lib/outline');
-// var cqUrl = 'http://www-stage.its.sfu.ca/bin/wcm/course-outlines';
 var cqUrl = 'http://www.sfu.ca/bin/wcm/course-outlines';
 
 exports.index = function(req, res) {
