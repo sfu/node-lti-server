@@ -86,6 +86,27 @@ var getCanvasProfilesForCourse = function(outline) {
                 deferred.reject();
             }
             instructor.canvas = profile;
+            getMessagePathForInstructor(instructor).then(deferred.resolve);
+        }
+    });
+    return deferred.promise;
+}
+
+var getMessagePathForInstructor = function(instructor) {
+    var deferred = Q.defer();
+    var id = instructor.email.split('@')[0];
+    var url = sfuCanvasProfileUrl.replace('USERNAME', id);
+    request(url, function(err, response, body) {
+        var profile;
+        if (err || response.statusCode !== 200) {
+            deferred.reject();
+        } else {
+            try {
+                profile = JSON.parse(body);
+            } catch(JSONError) {
+                deferred.reject();
+            }
+            instructor.canvas.message_user_path = profile.message_user_path;
             deferred.resolve(instructor);
         }
     });
