@@ -11,6 +11,9 @@
         <% if (instructor.canvas) { %>
         <a href="<%= course.canvas.courseUrl %>/users/<%= instructor.canvas.id %>" target=_parent>Canvas Profile</a><br>
         <% } %>
+        <% if (instructor.canvas.message_user_path) { %>
+        <a href="https://canvas.sfu.ca<%= instructor.canvas.message_user_path %>">Send Canvas Message</a><br>
+        <% } %>
         <a href="mailto:<%= instructor.email %>"><%= instructor.email %></a>
         <% if (instructor.phone) { %>
         <br>
