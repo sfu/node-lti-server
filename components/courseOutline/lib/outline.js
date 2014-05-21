@@ -3,8 +3,8 @@ var Q = require('q');
 
 var courseUrlBase = 'http://www.sfu.ca/bin/wcm/course-outlines/?';
 var canvasToken = process.env.CANVAS_TOKEN || '';
-var canvasUrl = 'https://canvas.sfu.ca/api/v1/users/sis_login_id:USERNAME/profile?access_token=' + canvasToken;
-
+var canvasProfileUrl = 'https://canvas.sfu.ca/api/v1/users/sis_login_id:USERNAME/profile?access_token=' + canvasToken;
+var sfuCanvasProfileUrl = 'https://canvas.sfu.ca/sfu/api/user/USERNAME/profile?access_token=' + canvasToken;
 
 module.exports.getAllOutlines = function(courses, ltiLaunchParameters) {
     var promises = [];
@@ -73,7 +73,7 @@ var getCanvasProfilesForCourse = function(outline) {
  var getCanvasProfileForInstructor = function(instructor) {
     var deferred = Q.defer();
     var id = instructor.email.split('@')[0];
-    var url = canvasUrl.replace('USERNAME', id);
+    var url = canvasProfileUrl.replace('USERNAME', id);
 
     request(url, function(err, response, body) {
         var profile;
