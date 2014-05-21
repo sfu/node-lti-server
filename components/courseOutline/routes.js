@@ -15,16 +15,28 @@ exports.index = function(req, res) {
     };
 
     function renderOutline(outlines) {
+        if (!outlines || outlines.length === 0) {
+            handleError();
+            return false;
+        }
         res.render(path.join(__dirname, 'views/index'), {outlines: outlines})
     }
 
     var courses = utils.coursesFromSisId(req.body.lis_course_offering_sourcedid || null);
-    if (!courses) {
-        renderError('500', 500, {title: 'Non-Credit Course', message: 'This does not appear to be a credit course.'});
+    if (!courses.length) {
+        // renderError('error', 400, {title: 'Non-Credit Course', message: 'This does not appear to be a credit course. Course outlines are only available for SFU credit courses.'});
+        handleError({
+            statusCode: 400,
+            data: {
+                message: 'This does not appear to be a credit course. Course outlines are only available for SFU credit courses.',
+                title: 'Non-Credit Course'
+            }
+        });
         return false;
     }
 
     outline.getAllOutlines(courses, req.body).
         then(outline.getCanvasProfilesForAllCourses, handleError).
-        then(renderOutline, handleError);
+        then(renderOutline, handleError).
+        catch(handleError);
 }

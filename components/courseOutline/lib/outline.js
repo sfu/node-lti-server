@@ -28,15 +28,16 @@ module.exports.getAllOutlines = function(courses, ltiLaunchParameters) {
             } else {
                 try {
                     var outline = JSON.parse(body);
+                    outline.canvas = {
+                        courseId: ltiLaunchParameters.custom_canvas_course_id,
+                        sisId: ltiLaunchParameters.lis_course_offering_sourcedid,
+                        courseUrl: ltiLaunchParameters.launch_presentation_return_url
+                    }
+                    deferred.resolve(outline);
                 } catch(JSONError) {
                     deferred.reject(JSONError);
+                    return false;
                 }
-                outline.canvas = {
-                    courseId: ltiLaunchParameters.custom_canvas_course_id,
-                    sisId: ltiLaunchParameters.lis_course_offering_sourcedid,
-                    courseUrl: ltiLaunchParameters.launch_presentation_return_url
-                }
-                deferred.resolve(outline);
             }
         });
         promises.push(deferred.promise);
