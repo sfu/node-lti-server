@@ -15,7 +15,8 @@ app.logger = new (winston.Logger)({
     transports: [
         new (winston.transports.Console)({
             timestamp: function() { return new Date().toString(); },
-            handleExceptions: true
+            handleExceptions: true,
+            colorize: true
         }),
         new (winston.transports.Mail)({
             to: 'nodejsapps-logger@sfu.ca',
