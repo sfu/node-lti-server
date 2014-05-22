@@ -1,7 +1,7 @@
-var routes = require('./routes.js');
 var ejs = require('ejs');
 
 module.exports = function(app) {
+    var routes = require('./routes.js')(app);
     ejs.filters.pluralize = function(num, str) {
         return num === 1 ? str : str + 's';
     };
