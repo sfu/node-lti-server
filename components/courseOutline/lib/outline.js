@@ -79,12 +79,13 @@ var getCanvasProfilesForCourse = function(outline) {
     request(url, function(err, response, body) {
         var profile;
         if (err || response.statusCode !== 200) {
-            deferred.reject();
+            var error = err ? err : new Error('Non-200 response from Canvas profile endpoint. URL: ' + url + ' SC: ' + response.statusCode + ' Body: ' + response.body);
+            deferred.reject({error: error});
         } else {
             try {
                 profile = JSON.parse(body);
             } catch(JSONError) {
-                deferred.reject();
+                deferred.reject({error: new Error('JSON parse error: ' + JSONError.message + ' Body: ' + body)});
             }
             instructor.canvas = profile;
             getMessagePathForInstructor(instructor).then(deferred.resolve);
@@ -101,14 +102,14 @@ var getMessagePathForInstructor = function(instructor) {
         var profile;
         if (err || response.statusCode !== 200) {
             deferred.reject();
+            instructor.canvas.message_user_path = profile.message_user_path;
+            deferred.resolve(instructor);
         } else {
             try {
                 profile = JSON.parse(body);
             } catch(JSONError) {
-                deferred.reject();
+                deferred.reject({error: new Error('JSON parse error: ' + JSONError.message + ' Body: ' + body)});
             }
-            instructor.canvas.message_user_path = profile.message_user_path;
-            deferred.resolve(instructor);
         }
     });
     return deferred.promise;
