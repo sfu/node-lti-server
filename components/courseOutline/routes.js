@@ -25,7 +25,6 @@ module.exports = function(app) {
         }
         var courses = utils.coursesFromSisId(req.body.lis_course_offering_sourcedid || null);
         if (!courses.length) {
-            // renderError('error', 400, {title: 'Non-Credit Course', message: 'This does not appear to be a credit course. Course outlines are only available for SFU credit courses.'});
             handleError({
                 statusCode: 400,
                 data: {
