@@ -87,11 +87,11 @@ var getCanvasProfilesForCourse = function(outline) {
         } else {
             try {
                 profile = JSON.parse(body);
+                instructor.canvas = profile;
+                getMessagePathForInstructor(instructor).then(deferred.resolve);
             } catch(JSONError) {
                 deferred.reject({error: new Error('JSON parse error: ' + JSONError.message + ' Body: ' + body)});
             }
-            instructor.canvas = profile;
-            getMessagePathForInstructor(instructor).then(deferred.resolve);
         }
     });
     return deferred.promise;
@@ -105,11 +105,11 @@ var getMessagePathForInstructor = function(instructor) {
         var profile;
         if (err || response.statusCode !== 200) {
             deferred.reject();
-            instructor.canvas.message_user_path = profile.message_user_path;
-            deferred.resolve(instructor);
         } else {
             try {
                 profile = JSON.parse(body);
+                instructor.canvas.message_user_path = profile.message_user_path;
+                deferred.resolve(instructor);
             } catch(JSONError) {
                 deferred.reject({error: new Error('JSON parse error: ' + JSONError.message + ' Body: ' + body)});
             }
