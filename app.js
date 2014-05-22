@@ -22,7 +22,7 @@ app.logger = new (winston.Logger)({
             to: 'nodejsapps-logger@sfu.ca',
             host: 'mailgate.sfu.ca',
             from: process.title + '@' + os.hostname(),
-            subject: new Date().toString() + ' ' + process.title + ': {{level}} {{msg}}',
+            subject: new Date().toString() + ' ' + process.title + ': {{level}}',
             tls: true,
             level: 'error',
             timestamp: function() { return new Date().toString(); },
