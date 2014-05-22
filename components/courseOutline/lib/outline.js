@@ -61,11 +61,14 @@ var getCanvasProfilesForCourse = function(outline) {
         promises.push(getCanvasProfileForInstructor(outline.instructor[i]));
     };
 
-    Q.all(promises).then(function(profiles) {
+    var profiles = Q.all(promises);
+    profiles.then(function(profiles) {
         profiles.forEach(function(profile, idx, array) {
             outline.instructor[idx] = profile;
         });
         deferred.resolve(outline);
+    }, function(reason) {
+        deferred.reject(reason);
     });
 
     return deferred.promise;
