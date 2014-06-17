@@ -1,7 +1,7 @@
 <% 
 var principalInstructors = [];
 course.instructor.forEach(function(instructor) { 
-    if (instructor.roleCode && instructor.roleCode === 'PI') }
+    if (instructor.roleCode && instructor.roleCode === 'PI') {
         principalInstructors.push(instructor);
     }
 });
