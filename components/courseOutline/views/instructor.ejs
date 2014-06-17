@@ -1,7 +1,15 @@
-<h3><%=: course.instructor.length | pluralize: 'Instructor' %></h3>
+<% 
+var principalInstructors = [];
+course.instructor.forEach(function(instructor) { 
+    if (instructor.roleCode && instructor.roleCode === 'PI') }
+        principalInstructors.push(instructor);
+    }
+});
+
+<h3><%=: principalInstructors.length | pluralize: 'Instructor' %></h3>
 <div class="instructorList overviewList clearfix">
 <ul>
-  <% course.instructor.forEach(function(instructor) { %>
+  <% principalInstructors.forEach(function(instructor) { %>
     <% if (instructor.roleCode && instructor.roleCode === 'PI') { %>
     <li>
       <div class="left instructorImage">
