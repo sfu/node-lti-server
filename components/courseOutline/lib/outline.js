@@ -10,7 +10,7 @@ module.exports.getAllOutlines = function(courses, ltiLaunchParameters) {
     var promises = [];
     courses.forEach(function(course) {
         var deferred = Q.defer();
-        course = course.replace(/-/g, '/');
+        course = course.toLowerCase().replace(/-/g, '/');
         var url = courseUrlBase + course;
         request(url, function(err, response, body) {
             if (err) { deferred.reject(err); }
