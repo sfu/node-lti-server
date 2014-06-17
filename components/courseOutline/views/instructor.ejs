@@ -2,6 +2,7 @@
 <div class="instructorList overviewList clearfix">
 <ul>
   <% course.instructor.forEach(function(instructor) { %>
+    <% if { instructor.roleCode && instructor.roleCode === 'PI' } %>
     <li>
       <div class="left instructorImage">
         <img src="<%= instructor.canvas.avatar_url %>" alt="<%= instructor.canvas.name %> Profile Photo">
@@ -21,6 +22,7 @@
         <% } %>
       </div>
     </li>
+    <% } %>
   <% }) %>
   </ul>
 </div>
