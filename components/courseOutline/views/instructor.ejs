@@ -5,12 +5,12 @@ course.instructor.forEach(function(instructor) {
         principalInstructors.push(instructor);
     }
 });
+%>
 
 <h3><%=: principalInstructors.length | pluralize: 'Instructor' %></h3>
 <div class="instructorList overviewList clearfix">
 <ul>
   <% principalInstructors.forEach(function(instructor) { %>
-    <% if (instructor.roleCode && instructor.roleCode === 'PI') { %>
     <li>
       <div class="left instructorImage">
         <img src="<%= instructor.canvas.avatar_url %>" alt="<%= instructor.canvas.name %> Profile Photo">
@@ -30,7 +30,6 @@ course.instructor.forEach(function(instructor) {
         <% } %>
       </div>
     </li>
-    <% } %>
   <% }) %>
   </ul>
 </div>
