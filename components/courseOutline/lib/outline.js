@@ -14,7 +14,7 @@ module.exports.getAllOutlines = function(courses, ltiLaunchParameters) {
         var url = courseUrlBase + course;
         request(url, function(err, response, body) {
             if (err) { deferred.reject(err); }
-            else if (response.statusCode === 404 || (response.statusCode === 200 && body === '{}')) {
+            if (response.statusCode === 404 || (response.statusCode === 200 && body === '{}')) {
                 // The 200/{} check above is because this service used to return that for a non-found course.
                 // Ron fixed it to return 404 and a error message, but some of the nodes are still returning 200
                 // because CQ.
