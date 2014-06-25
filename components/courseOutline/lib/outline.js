@@ -58,7 +58,7 @@ var getCanvasProfilesForCourse = function(outline) {
     var deferred = Q.defer();
     var promises = [];
     for (var i = 0; i < numInstructors; i++) {
-        promises.push(getCanvasProfileForInstructor(outline.instructor[i]));
+        promises.push(getCanvasProfileForInstructor(outline.instructor[i], outline));
     };
 
     var profiles = Q.all(promises);
@@ -74,7 +74,7 @@ var getCanvasProfilesForCourse = function(outline) {
     return deferred.promise;
 };
 
- var getCanvasProfileForInstructor = function(instructor) {
+ var getCanvasProfileForInstructor = function(instructor, outline) {
     var deferred = Q.defer();
     if (!instructor.hasOwnProperty('email')) { 
         deferred.resolve(instructor);
@@ -86,7 +86,7 @@ var getCanvasProfilesForCourse = function(outline) {
     request(url, function(err, response, body) {
         var profile;
         if (err || response.statusCode !== 200) {
-            var error = err ? err : new Error('Non-200 response from Canvas profile endpoint. URL: ' + url + ' SC: ' + response.statusCode + ' Body: ' + response.body);
+            var error = err ? err : new Error('Non-200 response from Canvas profile endpoint. URL: ' + url + ' SC: ' + response.statusCode + ' Body: ' + response.body + ' Instructor: ' + JSON.stringify(instructor) + 'Outline: ' + JSON.stringify(outline));
             deferred.reject({error: error});
         } else {
             try {
