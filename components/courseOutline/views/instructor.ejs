@@ -5,6 +5,10 @@ course.instructor.forEach(function(instructor) {
         principalInstructors.push(instructor);
     }
 });
+
+var avatarUrl = function(instructor) {
+    return (instructor.canvas && instructor.canvas.avatar_url) ? instructor.canvas.avatar_url : 'https://i1.wp.com/canvas.sfu.ca/images/messages/avatar-50.png?ssl=1';
+};
 %>
 
 <h3><%=: principalInstructors.length | pluralize: 'Instructor' %></h3>
@@ -13,7 +17,7 @@ course.instructor.forEach(function(instructor) {
   <% principalInstructors.forEach(function(instructor) { %>
     <li>
       <div class="left instructorImage">
-        <img src="<%= instructor.canvas.avatar_url %>" alt="<%= instructor.canvas.name %> Profile Photo">
+        <img src="<%= avatarUrl(instructor) %>" alt="<%= instructor.canvas.name %> Profile Photo">
       </div>
       <div class="left instructorProfile">
         <h4><%= instructor.name %></h4>
