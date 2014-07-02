@@ -17,7 +17,7 @@ var avatarUrl = function(instructor) {
   <% principalInstructors.forEach(function(instructor) { %>
     <li>
       <div class="left instructorImage">
-        <img src="<%= avatarUrl(instructor) %>" alt="<%= instructor.canvas.name %> Profile Photo">
+        <img src="<%= avatarUrl(instructor) %>" alt="<%= instructor.name %> Profile Photo">
       </div>
       <div class="left instructorProfile">
         <h4><%= instructor.name %></h4>
