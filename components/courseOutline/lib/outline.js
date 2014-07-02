@@ -78,7 +78,7 @@ var getCanvasProfilesForCourse = function(outline) {
     var deferred = Q.defer();
     if (!instructor.hasOwnProperty('email') || !instructor.email.length) { 
         deferred.resolve(instructor);
-        return false;
+        return instructor;
     }
     var id = instructor.email.split('@')[0];
     var url = canvasProfileUrl.replace('USERNAME', id);
@@ -105,7 +105,7 @@ var getMessagePathForInstructor = function(instructor) {
     var deferred = Q.defer();
     if (!instructor.hasOwnProperty('email') || !instructor.email.length) {
         deferred.resolve(instructor);
-        return false;
+        return instructor;
     }
     var id = instructor.email.split('@')[0];
     var url = sfuCanvasProfileUrl.replace('USERNAME', id);
