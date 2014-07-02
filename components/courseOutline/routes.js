@@ -9,11 +9,11 @@ module.exports = function(app) {
             var statusCode = reason.statusCode || 500;
             var data = reason.data || {
                 title: 'An Error Occurred',
-                message: 'We&apos;re sorry, but an error occured while fetching the course outline. Please try again later.'
+                message: 'An error occured while fetching the course outline. Please try again later.'
             }
             res.status(statusCode)
             res.render(template, data);
-            app.logger.error(reason.error.message);
+            app.logger.error(reason.error.message || reason.toString());
         };
 
         function renderOutline(outlines) {
