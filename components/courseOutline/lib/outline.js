@@ -76,7 +76,7 @@ var getCanvasProfilesForCourse = function(outline) {
 
  var getCanvasProfileForInstructor = function(instructor, outline) {
     var deferred = Q.defer();
-    if (!instructor.hasOwnProperty('email')) { 
+    if (!instructor.hasOwnProperty('email') && instructor.email.length > 0) { 
         deferred.resolve(instructor);
         return false;
     }
@@ -103,7 +103,7 @@ var getCanvasProfilesForCourse = function(outline) {
 
 var getMessagePathForInstructor = function(instructor) {
     var deferred = Q.defer();
-    if (!instructor.hasOwnProperty('email')) {
+    if (!instructor.hasOwnProperty('email') && instructor.email.length > 0) {
         deferred.resolve(instructor);
         return false;
     }
