@@ -1,0 +1,9 @@
+<tr>
+    <% row.forEach(function(photo) { %>
+        <td>
+            <div class="rosterImage" style="background: url(data:image/png;base64,<%= photo.PictureIdentification %>) center center no-repeat"></div>
+            <p class="studentInfo"><%= photo.LastName %>, <%= photo.FirstName %><br/>
+            <%= photo.SfuId %></p>
+        </td>
+    <% }); %>
+</tr>
