@@ -39,15 +39,15 @@ module.exports = function(app, config) {
                 var normalizedPhotos = photos.map(function(photo, index) {
                     if (!photo) {
                         var name = roster[index].sortable_name.split(', ');
-                        return  {
+                        photo = {
                             LastName: name[0],
                             FirstName: name[1],
                             SfuId: roster[index].sis_user_id,
                             PictureIdentification: noPhotoImage
                         }
-                    } else {
-                        return photo;
                     }
+                    photo.canvasProfileUrl = req.body.launch_presentation_return_url + '/users/' + roster[index].id
+                    return photo;
                 });
 
                 var rows = [], maxPerRow = 4;
