@@ -1,2 +1,3 @@
 node_modules
 configuration-dev.xml
+config/*.json
