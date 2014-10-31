@@ -1,0 +1,16 @@
+.rosterTable {
+    width: 100%;
+}
+
+.rosterTable td {
+    width: 25%;
+}
+.rosterImage {
+    width: 200px;
+    height: 255px;
+    margin: 0 auto;
+}
+
+.studentInfo {
+    text-align: center;
+}
