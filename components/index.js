@@ -7,7 +7,13 @@ module.exports = function(app, express) {
             var componentPath = path.join(__dirname, component),
                 publicPath = path.join(componentPath, 'public');
 
-            require(componentPath)(app);
+            var configPath = path.resolve(path.dirname(require.main.filename), 'config', component + '.json');
+            var config;
+            if (fs.existsSync(configPath)) {
+                config = require(configPath);
+            };
+
+            require(componentPath)(app, config);
 
             if ((fs.readdirSync(componentPath).indexOf('public') >= 0) && fs.lstatSync(publicPath).isDirectory()) {
                 app.use('/' + component, express.static(publicPath));
