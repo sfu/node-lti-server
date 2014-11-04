@@ -12,9 +12,11 @@
     "start": "node app"
   },
   "dependencies": {
+    "connect-redis": "1.4.7",
     "css": "*",
     "ejs": "*",
     "express": "3.3.x",
+    "express-session": "^1.9.1",
     "moment": "^2.6.0",
     "node-sfu-photos-client": "git+https://github.com/sfu/node-sfu-photos-client.git",
     "q": "^1.0.1",
