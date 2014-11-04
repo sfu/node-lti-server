@@ -2,12 +2,14 @@
  * Module dependencies.
  */
 
-var express = require('express'),
-    app = express(),
-    path = require('path'),
-    os = require('os'),
-    winston = require('winston');
-
+var express = require('express');
+var app = express();
+var path = require('path');
+var os = require('os');
+var winston = require('winston');
+var session = require('express-session')
+var RedisStore = require('connect-redis')(express);
+var http = require('http');
 
 // Logging
 require('winston-mail').Mail;
@@ -39,7 +41,10 @@ var winstonStream = {
 };
 
 app.configure(function() {
+    app.use(express.cookieParser());
+    app.use(express.session({secret: '1234567890QWERTY'}));
     app.set('port', process.env.PORT || 3000);
+    app.set('https_port', process.env.HTTPS_PORT || 3443);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'ejs');
     app.use(express.favicon());
@@ -75,10 +80,22 @@ app.configure('production', function() {
 // Require components
 require('./components')(app, express);
 
-app.listen(app.get('port'), function() {
+http.createServer(app).listen(app.get('port'), function() {
     console.log('LTI server listening on port %s, PID %s', app.get('port'), process.pid);
     process.title = 'ltiserver';
 });
+
+if (process.env.HTTPS) {
+    var https = require('https');
+    var fs = require('fs');
+    var options = {
+      key: fs.readFileSync(process.env.SSL_KEYFILE),
+      cert: fs.readFileSync(process.env.SSL_CERTFILE)
+    };
+    https.createServer(options, app).listen(app.get('https_port'), function() {
+        console.log('LTI server listening on HTTPS port %s, PID %s', app.get('https_port'), process.pid);
+    });
+}
 
 process.on('SIGTERM', function() {
     console.log('received SIGTERM request, stopping node-lti-server PID: %s', process.pid);
