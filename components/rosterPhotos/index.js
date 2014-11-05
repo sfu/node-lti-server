@@ -35,6 +35,11 @@ module.exports = function(app, config) {
         });
     });
 
+    app.get('/rosterPhotos/:course', hasLaunchForCourse, function(req, res) {
+        var launchData = req.session.launches[req.params.course];
+        var canvasurl = 'canvas-stage.sfu.ca'; ///launchData.body.custom_canvas_api_domain;
+        var proto = launchData.body.launch_presentation_return_url.match(/https\:\/\//) ? 'https://' : 'http://';
+        var courseId = launchData.body.custom_canvas_course_id;
         var apiUrl = proto + canvasurl + '/api/v1/courses/' + courseId + '/users';
         var queryParams = {
             enrollment_type: 'student',
@@ -53,7 +58,7 @@ module.exports = function(app, config) {
             var sfuIds = roster.map(function(user) {
                 return user.sis_user_id;
             });
-            client.getPhoto(sfuIds).then(function(photos) {
+            photoClient.getPhoto(sfuIds).then(function(photos) {
                 // ids that don't have photos will be undefined in the photos array
                 // replace with placeholder data
 
@@ -67,7 +72,7 @@ module.exports = function(app, config) {
                             PictureIdentification: noPhotoImage
                         }
                     }
-                    photo.canvasProfileUrl = req.body.launch_presentation_return_url + '/users/' + roster[index].id
+                    photo.canvasProfileUrl = launchData.body.launch_presentation_return_url + '/users/' + roster[index].id
                     return photo;
                 });
 
@@ -75,9 +80,8 @@ module.exports = function(app, config) {
                 for (var i=0, j=normalizedPhotos.length; i<j; i+=maxPerRow) {
                   rows.push(normalizedPhotos.slice(i,i+maxPerRow));
                 }
-                res.render(path.join(__dirname, 'views/index'), { rows: rows, course: req.body, title: 'Course Roster' })
+                res.render(path.join(__dirname, 'views/row'), { rows: rows, layout: false });
             }).fail(function(err) {
-                console.log(arguments);
                 res.render('500', { title: '500' });
             });
 
