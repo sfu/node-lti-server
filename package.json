@@ -17,6 +17,7 @@
     "ejs": "*",
     "express": "3.3.x",
     "express-session": "^1.9.1",
+    "ims-lti": "^1.0.0",
     "moment": "^2.6.0",
     "node-sfu-photos-client": "git+https://github.com/sfu/node-sfu-photos-client.git",
     "q": "^1.0.1",
