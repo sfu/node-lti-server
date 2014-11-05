@@ -9,15 +9,13 @@
     <script src="/rosterPhotos/javascripts/spin.min.js"></script>
     <base target="_parent" />
   </head>
-  <body>
+  <body data-courseId="<%= course.custom_canvas_course_id %>">
     <h1>Roster Photos</h1>
     <p>Roster photos are drawn from SFU ID photos system.</p>
+    <div id="spinner"></div>
     <table class="rosterTable">
-      <tbody>
-        <% rows.forEach(function(row) { %>
-          <% include row %>
-        <% }); %>
-      </tbody>
+      <tbody></tbody>
     </table>
+    <script src="/rosterPhotos/javascripts/rosterPhotos.js"></script>
   </body>
 </html>
