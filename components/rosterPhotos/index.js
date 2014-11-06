@@ -18,7 +18,7 @@ function hasLaunchForCourse(req, res, next) {
 
 module.exports = function(app, config) {
     var photoClient = new PhotoClient(config.photoClient);
-    var nonceStore = new RedisNonceStore('rosterphotos', require('redis').createClient(config.redisNonceStore));
+    var nonceStore = new RedisNonceStore('rosterphotos', require('redis').createClient(config.redisNonceStore.port, config.redisNonceStore.host));
     var provider = new LTI.Provider('rosterphotos', config.ltiSecret, nonceStore);
 
     app.post('/rosterPhotos/launch', function(req, res) {
