@@ -55,12 +55,21 @@ module.exports = function(app, config) {
                 'Authorization': 'Bearer ' + config.canvasApiKey
             }
         }, function(err, response, roster) {
+            if (!roster || !roster.length) {
+                res.render('500', { title: '500' });
+                return false;
+            }
             var sfuIds = roster.map(function(user) {
                 return user.sis_user_id;
             });
             photoClient.getPhoto(sfuIds).then(function(photos) {
                 // ids that don't have photos will be undefined in the photos array
                 // replace with placeholder data
+
+                if (!photos || !photos.length) {
+                    res.render('500', { title: '500' });
+                    return false;
+                }
 
                 var normalizedPhotos = photos.map(function(photo, index) {
                     if (!photo) {
