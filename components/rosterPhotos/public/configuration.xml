@@ -16,7 +16,7 @@
     <lticm:property name="text">Roster Photos</lticm:property>
     <lticm:property name="domain">sfu.ca</lticm:property>
     <lticm:options name="course_navigation">
-      <lticm:property name="enabled">true</lticm:property>
+      <lticm:property name="default">disabled</lticm:property>
       <lticm:property name="url">https://nodejsf.its.sfu.ca:3001/rosterPhotos/launch</lticm:property>
       <lticm:property name="text">Roster Photos</lticm:property>
       <lticm:property name="visibility">admins</lticm:property>
