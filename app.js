@@ -10,6 +10,7 @@ var winston = require('winston');
 var session = require('express-session')
 var RedisStore = require('connect-redis')(express);
 var http = require('http');
+var config = require('./config/appConfig.json');
 
 // Logging
 require('winston-mail').Mail;
@@ -42,7 +43,10 @@ var winstonStream = {
 
 app.configure(function() {
     app.use(express.cookieParser());
-    app.use(express.session({secret: '1234567890QWERTY'}));
+    app.use(express.session({
+        store: new RedisStore(config.redisSessionStore),
+        secret: config.sessionSecret
+    }));
     app.set('port', process.env.PORT || 3000);
     app.set('https_port', process.env.HTTPS_PORT || 3443);
     app.set('views', __dirname + '/views');

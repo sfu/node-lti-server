@@ -21,6 +21,7 @@
     "moment": "^2.6.0",
     "node-sfu-photos-client": "git+https://github.com/sfu/node-sfu-photos-client.git",
     "q": "^1.0.1",
+    "redis": "^0.12.1",
     "request": "2.x",
     "winston": "0.7.x",
     "winston-mail": "0.2.x"

@@ -4,6 +4,8 @@ var fs = require('fs');
 var path = require('path');
 var noPhotoImage = fs.readFileSync(path.resolve(__dirname, 'public/images/no_photo.png')).toString('base64');
 var LTI = require('ims-lti');
+var RedisNonceStore = require ('ims-lti/lib/redis-nonce-store');
+
 
 function hasLaunchForCourse(req, res, next) {
     var courseId = req.params.course;
@@ -16,7 +18,8 @@ function hasLaunchForCourse(req, res, next) {
 
 module.exports = function(app, config) {
     var photoClient = new PhotoClient(config.photoClient);
-    var provider = new LTI.Provider('rosterphotos', config.ltiSecret);
+    var nonceStore = new RedisNonceStore('rosterphotos', require('redis').createClient(config.redisNonceStore));
+    var provider = new LTI.Provider('rosterphotos', config.ltiSecret, nonceStore);
 
     app.post('/rosterPhotos/launch', function(req, res) {
         provider.valid_request(req, function(err, isValid) {
@@ -28,8 +31,8 @@ module.exports = function(app, config) {
             } else {
                 var courseId = provider.body.custom_canvas_course_id;
                 req.session.launches = req.session.launches || {};
-                req.session.launches[courseId] = provider;
-                req.session.launches[courseId].body = provider.body;
+                req.session.launches[courseId] = provider.body;
+                // req.session.launches[courseId].body = provider.body;
                 res.render(path.join(__dirname, 'views/index'), { course: provider.body, title: 'Course Roster' })
             }
         });
@@ -37,9 +40,9 @@ module.exports = function(app, config) {
 
     app.get('/rosterPhotos/:course', hasLaunchForCourse, function(req, res) {
         var launchData = req.session.launches[req.params.course];
-        var canvasurl = launchData.body.custom_canvas_api_domain;
-        var proto = launchData.body.launch_presentation_return_url.match(/https\:\/\//) ? 'https://' : 'http://';
-        var courseId = launchData.body.custom_canvas_course_id;
+        var canvasurl = launchData.custom_canvas_api_domain;
+        var proto = launchData.launch_presentation_return_url.match(/https\:\/\//) ? 'https://' : 'http://';
+        var courseId = launchData.custom_canvas_course_id;
         var apiUrl = proto + canvasurl + '/api/v1/courses/' + courseId + '/users';
         var queryParams = {
             enrollment_type: 'student',
@@ -81,7 +84,7 @@ module.exports = function(app, config) {
                             PictureIdentification: noPhotoImage
                         }
                     }
-                    photo.canvasProfileUrl = launchData.body.launch_presentation_return_url + '/users/' + roster[index].id
+                    photo.canvasProfileUrl = launchData.launch_presentation_return_url + '/users/' + roster[index].id
                     return photo;
                 });
 
