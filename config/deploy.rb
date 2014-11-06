@@ -39,6 +39,7 @@ namespace :deploy do
     transaction do
       update_code
       node.npminstall
+      node.copyconfig
       symlink
     end
   end
@@ -69,6 +70,11 @@ namespace :node do
     desc "Install node modules with npm"
     task :npminstall do
         run "cd #{latest_release} && npm install"
+    end
+
+    desc "Copy config files"
+    task :copyconfig do
+      run "cp #{shared_path}/config/*.json #{release_path}/config"
     end
 end
 
