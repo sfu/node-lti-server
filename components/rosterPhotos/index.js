@@ -37,7 +37,7 @@ module.exports = function(app, config) {
 
     app.get('/rosterPhotos/:course', hasLaunchForCourse, function(req, res) {
         var launchData = req.session.launches[req.params.course];
-        var canvasurl = 'canvas-stage.sfu.ca'; ///launchData.body.custom_canvas_api_domain;
+        var canvasurl = launchData.body.custom_canvas_api_domain;
         var proto = launchData.body.launch_presentation_return_url.match(/https\:\/\//) ? 'https://' : 'http://';
         var courseId = launchData.body.custom_canvas_course_id;
         var apiUrl = proto + canvasurl + '/api/v1/courses/' + courseId + '/users';
