@@ -42,6 +42,7 @@ var winstonStream = {
 };
 
 app.configure(function() {
+    app.enable('trust proxy');
     app.use(express.cookieParser());
     app.use(express.session({
         store: new RedisStore(config.redisSessionStore),
