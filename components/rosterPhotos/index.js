@@ -25,6 +25,7 @@ module.exports = function(app, config) {
     app.post('/rosterPhotos/launch', function(req, res) {
         provider.valid_request(req, function(err, isValid) {
             if (err) {
+                console.log(err, req.body);
                 res.render('500', { title: 500 });
             } else if (!isValid) {
                 // TODO redirect to a proper unauthorized page
@@ -58,8 +59,12 @@ module.exports = function(app, config) {
                 'Authorization': 'Bearer ' + config.canvasApiKey
             }
         }, function(err, response, roster) {
-            if (!roster || !roster.length) {
+            if (err) {
+                console.log(err);
                 res.render('500', { title: '500' });
+            }
+            if (!roster || !roster.length) {
+                res.render(path.join(__dirname, 'views/no_students'), { layout: false });
                 return false;
             }
             var sfuIds = roster.map(function(user) {
