@@ -2,6 +2,7 @@ var request = require('request');
 var PhotoClient = require('node-sfu-photos-client');
 var fs = require('fs');
 var path = require('path');
+var url = require('url');
 var noPhotoImage = fs.readFileSync(path.resolve(__dirname, 'public/images/no_photo.png')).toString('base64');
 var LTI = require('ims-lti');
 var RedisNonceStore = require ('ims-lti/lib/redis-nonce-store');
@@ -40,10 +41,9 @@ module.exports = function(app, config) {
 
     app.get('/rosterPhotos/:course', hasLaunchForCourse, function(req, res) {
         var launchData = req.session.launches[req.params.course];
-        var canvasurl = launchData.custom_canvas_api_domain;
-        var proto = launchData.launch_presentation_return_url.match(/https\:\/\//) ? 'https://' : 'http://';
+        var parsedUrl = url.parse(launchData.launch_presentation_return_url);
         var courseId = launchData.custom_canvas_course_id;
-        var apiUrl = proto + canvasurl + '/api/v1/courses/' + courseId + '/users';
+        var apiUrl = parsedUrl.protocol + '//' + parsedUrl.host + '/api/v1/courses/' + courseId + '/users';
         var queryParams = {
             enrollment_type: 'student',
             per_page: '3000'
@@ -84,7 +84,8 @@ module.exports = function(app, config) {
                             PictureIdentification: noPhotoImage
                         }
                     }
-                    photo.canvasProfileUrl = launchData.launch_presentation_return_url + '/users/' + roster[index].id
+                    photo.canvasProfileUrl = parsedUrl.protocol + '//' + parsedUrl.host + '/courses/' + courseId + '/users/' + roster[index].id;
+                    console.log(photo.canvasProfileUrl);
                     return photo;
                 });
 
