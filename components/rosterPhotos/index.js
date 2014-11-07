@@ -85,7 +85,6 @@ module.exports = function(app, config) {
                         }
                     }
                     photo.canvasProfileUrl = parsedUrl.protocol + '//' + parsedUrl.host + '/courses/' + courseId + '/users/' + roster[index].id;
-                    console.log(photo.canvasProfileUrl);
                     return photo;
                 });
 
