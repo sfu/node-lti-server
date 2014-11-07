@@ -18,18 +18,25 @@
     top: '50%',
     left: '50%'
   };
-  var spinner = new Spinner(spinnerOpts).spin();
   var spinnerTarget = document.getElementById('spinner');
+  var spinner = new Spinner(spinnerOpts).spin(spinnerTarget);
   var courseId = $('body').data('courseid');
   var url = '/rosterPhotos/' + courseId;
   var target = $('.rosterTable tbody');
   $(spinnerTarget).prepend(spinner.el);
+  spinnerTarget.appendChild(spinner.el);
+  var showTimeoutMessage = function() {
+    $('.spinner').append($('#message').html());
+  }
+  var timer;
   $.ajax({
     url: url,
     beforeSend: function() {
-      spinnerTarget.appendChild(spinner.el);
+      timer = window.setTimeout(showTimeoutMessage, 4000);
     },
     success: function(html) {
+      clearTimeout(timer);
+      $('.timeoutMessage').remove();
       spinner.stop();
       target.append(html);
       parent.postMessage(JSON.stringify({subject: 'lti.frameResize', height: $(document).height()+"px"}), '*');
