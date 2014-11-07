@@ -2,6 +2,9 @@ h1 {
     font-size: 2em;
 }
 
+.smaller {
+    font-size: 11px;
+}
 .rosterTable {
     width: 100%;
 }
