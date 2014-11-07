@@ -18,5 +18,10 @@
             <% }) %>
     <% } %>
     <script src="libraryReserves/javascripts/imgreplacer.js"></script>
+    <script>
+      $(function(){
+         parent.postMessage(JSON.stringify({subject: 'lti.frameResize', height: $(document).height()+"px"}), '*');
+       });
+    </script>
   </body>
 </html>

@@ -36,6 +36,9 @@
         $('.courseOutline').hide();
         $('#'+target).show();
       });
+      $(function(){
+         parent.postMessage(JSON.stringify({subject: 'lti.frameResize', height: $(document).height()+"px"}), '*');
+       });
     </script>
   </body>
 </html>

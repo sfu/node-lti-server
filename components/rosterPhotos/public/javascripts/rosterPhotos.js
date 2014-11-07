@@ -32,6 +32,7 @@
     success: function(html) {
       spinner.stop();
       target.append(html);
+      parent.postMessage(JSON.stringify({subject: 'lti.frameResize', height: $(document).height()+"px"}), '*');
     }
   });
 
