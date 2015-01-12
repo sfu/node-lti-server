@@ -14,7 +14,7 @@
   "dependencies": {
     "connect-redis": "1.4.7",
     "css": "*",
-    "ejs": "*",
+    "ejs": "1.0.0",
     "express": "3.3.x",
     "express-session": "^1.9.1",
     "ims-lti": "^1.0.0",
