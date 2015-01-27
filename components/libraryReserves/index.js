@@ -36,6 +36,7 @@ module.exports = function(app) {
 
         courses = courseSisId.split(':');
         courses.forEach(function(course) {
+            if (course.indexOf('-') === -1) { counter++ ; return false; }  // Some courses have a SIS ID like 1151-cogs-100-j100:MANUAL (for exempting from the enrollment script) and that was tripping this up
             course = course.split('-');
             request({
                 url: libApiUrl,
