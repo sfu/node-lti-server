@@ -48,8 +48,8 @@ app.configure(function() {
         store: new RedisStore(config.redisSessionStore),
         secret: config.sessionSecret
     }));
-    app.set('port', process.env.PORT || 3000);
-    app.set('https_port', process.env.HTTPS_PORT || 3443);
+    app.set('port', config.port || 3000);
+    app.set('https_port', config.https_port || 3443);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'ejs');
     app.use(express.favicon());

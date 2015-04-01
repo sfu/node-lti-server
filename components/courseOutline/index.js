@@ -1,7 +1,7 @@
 var ejs = require('ejs');
 
-module.exports = function(app) {
-    var routes = require('./routes.js')(app);
+module.exports = function(app, config) {
+    var routes = require('./routes.js')(app, config);
     ejs.filters.pluralize = function(num, str) {
         return num === 1 ? str : str + 's';
     };
@@ -14,7 +14,6 @@ module.exports = function(app) {
         date = moment(date);
         return date.format(format);
     }
-
 
     app.post('/courseOutline', routes.index);
 }

@@ -1,8 +1,7 @@
 var utils = require('../../lib/utils');
-var outline = require('./lib/outline');
 
-
-module.exports = function(app) {
+module.exports = function(app, config) {
+    var outline = require('./lib/outline')(config);
     function index(req, res) {
         function handleError(reason) {
             var template = reason.template || 'error';
