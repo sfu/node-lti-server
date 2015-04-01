@@ -7,7 +7,7 @@ module.exports = function(app, express) {
             var componentPath = path.join(__dirname, component),
                 publicPath = path.join(componentPath, 'public');
 
-            var configPath = path.resolve(path.dirname(require.main.filename), 'config', component + '.json');
+            var configPath = path.resolve(componentPath, '../../config', component + '.json');
             var config;
             if (fs.existsSync(configPath)) {
                 config = require(configPath);
