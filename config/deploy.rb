@@ -50,7 +50,8 @@ namespace :deploy do
     end
 
     task :restart do
-      run "nohup /sbin/service ltiserver restart"
+      # run "nohup /sbin/service ltiserver restart"
+      run "touch #{shared_path}/restart.txt && curl http://localhost:3001/isup"
     end
 
 end
