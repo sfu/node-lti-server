@@ -1,3 +1,14 @@
+# This repository is archived
+
+The code in the repository is no longer in production at Simon Fraser University and is condiered archived. The functionality provided has been replaced by seperate LTI repositories:
+
+[Course Outlines](https://github.com/sfu/course-outlines-lti)
+[Roster Photos](https://github.com/sfu/roster-photos-lti)
+
+The Library Reserves LTI was replaced by a vendor solution managed by the SFU Library.
+
+-------
+
 # node-lti-server
 
 An extensible, general-purpose web server for serving [LTI](https://lti-examples.heroku.com/code.html) apps for [SFU Canvas](http://www.sfu.ca/canvas).
